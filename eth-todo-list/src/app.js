@@ -93,7 +93,7 @@ window.web3 = new Web3(web3.currentProvider)
       $newTaskTemplate.find('input')
                       .prop('name', taskId)
                       .prop('checked', taskCompleted)
-                      //.on('click', App.toggleCompleted)
+                      .on('click', App.toggleCompleted)
 
       if (taskCompleted) {
         $('#completedTaskList').append($newTaskTemplate)
@@ -111,6 +111,13 @@ window.web3 = new Web3(web3.currentProvider)
     App.setLoading(true)
     const content = $('#newTask').val()
     await App.todoList.createTask(content)
+    window.location.reload()
+  },
+
+  toggleCompleted: async(e) =>{
+    App.setLoading(true)
+    const taskId = e.target.name
+    await App.todoList.toggleCompleted(taskId)
     window.location.reload()
   },
 
